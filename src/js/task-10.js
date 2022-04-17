@@ -14,35 +14,38 @@ function onInputElChange(event) {
   console.log(!Number.isInteger(inputNum));
   if (inputNum < inputEl.min
     || inputNum > inputEl.max
-    || !Number.isInteger(inputNum)){
+    || !Number.isInteger(inputNum)
+  ) {
     alert(`Please enter an integer from ${inputEl.min} to ${inputEl.max}`);
     event.currentTarget.value = "";
   }
   
-  btnCreate.addEventListener("click", onBtnCreateClick);
-
+  btnCreate.addEventListener("click", createBoxes(inputEl.value));
 }
-
-
-
-function onBtnCreateClick() {
-  console.log(inputEl.value);
-  console.log(inputEl.min);
-  const devEl = [];
-  for (let i = inputEl.min; i <= inputEl.value; i ++){
-    const element = document.createElement("div");
-    devEl.push(element);
-  }
-  console.log(devEl);
-  boxesEl.append(...devEl);
- 
-} 
 
 btnDestroy.addEventListener("click", destroyBoxes);
 
-function destroyBoxes() {
-  boxesEl.innerHTML = "";
+function clearInput() {
   inputEl.value = "";
-  console.log(boxesEl.children);
+}
+ 
+function createBoxes(amount) {
+  const devEl = [];
+  let sizeDiv = 0;
+  for (let i = inputEl.min; i <= amount; i ++){
+    const element = document.createElement("div");
+    let incrSizeDiv = sizeDiv + 30;
+    element.style.width = `${incrSizeDiv}px`;
+    element.style.height = `${incrSizeDiv}px`;;
+    element.style.backgroundColor = getRandomHexColor();
+    devEl.push(element);
+    sizeDiv = incrSizeDiv;
+  }
+ boxesEl.append(...devEl);
+}
 
+
+function destroyBoxes() {
+  boxesEl.innerHTML = ""; 
+  clearInput();
 }
