@@ -22,6 +22,8 @@ function createBoxes(amount) {
     element.style.width = `${incrSizeDiv}px`;
     element.style.height = `${incrSizeDiv}px`;;
     element.style.backgroundColor = getRandomHexColor();
+    element.style.border = "solid";
+    element.style.borderWidth = "1px";
     
     devEl.push(element);
     sizeDiv = incrSizeDiv;
