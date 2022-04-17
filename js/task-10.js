@@ -39,8 +39,6 @@ function destroyBoxes() {
 function onInputElChange(event) {
   // boxesEl.innerHTML = "";
   const inputNum = Number(event.currentTarget.value);
-  console.log(inputNum);
-  console.log(!Number.isInteger(inputNum));
   if (inputNum < inputEl.min
     || inputNum > inputEl.max
     || !Number.isInteger(inputNum)
