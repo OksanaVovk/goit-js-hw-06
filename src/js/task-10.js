@@ -7,27 +7,11 @@ const inputEl = document.querySelector("input");
 const btnCreate = document.querySelector('[data-create]');
 const btnDestroy = document.querySelector('[data-destroy]');
 
-inputEl.addEventListener("change", onInputElChange);
-function onInputElChange(event) {
-  const inputNum = Number(event.currentTarget.value);
-  console.log(inputNum);
-  console.log(!Number.isInteger(inputNum));
-  if (inputNum < inputEl.min
-    || inputNum > inputEl.max
-    || !Number.isInteger(inputNum)
-  ) {
-    alert(`Please enter an integer from ${inputEl.min} to ${inputEl.max}`);
-    event.currentTarget.value = "";
-  }
-  
-  btnCreate.addEventListener("click", createBoxes(inputEl.value));
-}
-
-btnDestroy.addEventListener("click", destroyBoxes);
 
 function clearInput() {
   inputEl.value = "";
 }
+
  
 function createBoxes(amount) {
   const devEl = [];
@@ -38,14 +22,41 @@ function createBoxes(amount) {
     element.style.width = `${incrSizeDiv}px`;
     element.style.height = `${incrSizeDiv}px`;;
     element.style.backgroundColor = getRandomHexColor();
+    
     devEl.push(element);
     sizeDiv = incrSizeDiv;
   }
  boxesEl.append(...devEl);
 }
 
-
 function destroyBoxes() {
   boxesEl.innerHTML = ""; 
   clearInput();
 }
+
+function onInputElChange(event) {
+  // boxesEl.innerHTML = "";
+  const inputNum = Number(event.currentTarget.value);
+  console.log(inputNum);
+  console.log(!Number.isInteger(inputNum));
+  if (inputNum < inputEl.min
+    || inputNum > inputEl.max
+    || !Number.isInteger(inputNum)
+  ) {
+    alert(`Please enter an integer from ${inputEl.min} to ${inputEl.max}`);
+    event.currentTarget.value = "";
+  } else { 
+    return inputEl.value = inputNum;
+  }
+}
+
+
+inputEl.addEventListener("change", onInputElChange);
+
+btnCreate.addEventListener("click", function (event) {
+  if (event.currentTarget === event.target) {
+    createBoxes(inputEl.value);
+  }
+}); 
+
+btnDestroy.addEventListener("click", destroyBoxes);
