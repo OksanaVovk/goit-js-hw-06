@@ -4,14 +4,11 @@ console.log(input);
 input.addEventListener('blur', onInputBlur);
 
 function onInputBlur() {
-  console.log(input.value.length);
-  if (input.value.length === 6) {
+  if (input.value.length == input.dataset.length) {
     input.classList.remove('invalid');
     input.classList.add('valid');
-    console.log(input);
   } else {
     input.classList.remove('valid');
     input.classList.add('invalid');
-    console.log(input);
   }
 }

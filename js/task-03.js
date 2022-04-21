@@ -13,26 +13,42 @@ const images = [
   },
 ];
 
-const elements = images.map(image => {
-  const itemEl = document.createElement('li');
-  const imageEl = document.createElement('img');
+// const elements = images.map(image => {
+//   const itemEl = document.createElement('li');
+//   const imageEl = document.createElement('img');
 
-  imageEl.src = image.url;
-  imageEl.alt = image.alt;
+//   imageEl.src = image.url;
+//   imageEl.alt = image.alt;
 
-  itemEl.append(imageEl);
-  return itemEl;
-});
+//   itemEl.append(imageEl);
+//   return itemEl;
+// });
+
+// const listEl = document.querySelector('.gallery');
+// listEl.append(...elements);
+
+// const imageArray = document.querySelectorAll('img');
+// const itemArray = document.querySelectorAll('li');
+
+// for (let i = 0; i < itemArray.length; i++) {
+//   itemArray[i].insertAdjacentHTML(
+//     'beforebegin',
+//     `<h2> ${imageArray[i].alt} </h2>`,
+//   );
+// }
 
 const listEl = document.querySelector('.gallery');
-listEl.append(...elements);
 
-const imageArray = document.querySelectorAll('img');
-const itemArray = document.querySelectorAll('li');
-
-for (let i = 0; i < itemArray.length; i++) {
-  itemArray[i].insertAdjacentHTML(
-    'beforebegin',
-    `<h2> ${imageArray[i].alt} </h2>`,
-  );
+const galleryCards = createGalleryCard(images);
+listEl.insertAdjacentHTML('afterbegin', galleryCards);
+function createGalleryCard(galleryItems) {
+  return galleryItems
+    .map(({ url, alt }) => {
+      return `
+  <h2>"${alt}"</h2>    
+  <li>
+  <img src="${url}" alt="${alt}" />
+  </li>`;
+    })
+    .join('');
 }
