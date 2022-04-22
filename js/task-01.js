@@ -2,9 +2,7 @@ const listEl = document.querySelector('#categories');
 console.log('Number of categories: ', listEl.children.length);
 
 const itemsEl = document.querySelectorAll('.item');
-for (let i = 0; i < listEl.children.length; i++) {
-  // console.log('Category: ', itemsEl[i].querySelector('h2').textContent);
-  // console.log('Elements: ', itemsEl[i].querySelectorAll('li').length);
-  console.log('Category: ', itemsEl[i].firstElementChild.textContent);
-  console.log('Elements: ', itemsEl[i].lastElementChild.children.length);
-}
+itemsEl.forEach(item => {
+  console.log('Category: ', item.firstElementChild.textContent);
+  console.log('Elements: ', item.lastElementChild.children.length);
+});
